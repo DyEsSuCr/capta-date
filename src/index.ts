@@ -98,8 +98,8 @@ app.use((req: Request, res: Response<ErrorResponse>) => {
 });
 
 // Iniciar servidor
-app.listen(port, () => {
-  console.log(`Servidor ejecutándose en puerto ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Servidor ejecutándose en puerto ${port}`);
+// });
 
 export default app;
