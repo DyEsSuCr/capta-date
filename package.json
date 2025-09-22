@@ -2,10 +2,9 @@
   "name": "working-days-api",
   "version": "1.0.0",
   "description": "API para calcular fechas hábiles en Colombia",
-  "main": "dist/index.js",
     "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "ts-node src/index.ts",
     "dev": "ts-node src/index.ts",
     "test": "jest"
   },
