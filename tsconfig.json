@@ -14,5 +14,3 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }
-
-// https://www.cuevana.is/pelicula/424/la-lista-de-schindler
