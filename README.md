@@ -149,14 +149,6 @@ npm test
 ### Variables de Entorno
 - `PORT`: Puerto del servidor (por defecto: 3000)
 
-### Plataformas Compatibles
-- ✅ Vercel
-- ✅ Railway
-- ✅ Render
-- ✅ AWS Lambda (con adaptaciones)
-- ✅ Heroku
-- ✅ Google Cloud Run
-
 ### Ejemplo para Vercel
 1. Crear archivo `vercel.json`:
 ```json
