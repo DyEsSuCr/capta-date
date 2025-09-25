@@ -1,4 +1,4 @@
-import type { QueryParams, ValidationResult } from '../types';
+import { QueryParams, ValidationResult } from '../types';
 
 export class Validator {
   static validateParams(query: QueryParams): ValidationResult {

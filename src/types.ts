@@ -23,3 +23,12 @@ export interface Holiday {
   date: string;
   name: string;
 }
+
+export interface WorkingTimeConfig {
+  startHour: number;
+  endHour: number;
+  lunchStartHour: number;
+  lunchEndHour: number;
+  workingDays: number[];
+  hoursPerDay: number;
+}

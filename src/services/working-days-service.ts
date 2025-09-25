@@ -7,33 +7,41 @@ export class WorkingDaysService {
     hours: number = 0,
     startDate?: Date
   ): Promise<Date> {
-    // Obtener festivos
-    const holidays = await HolidayService.getHolidays();
+    try {
+      // Obtener festivos
+      const holidays = await HolidayService.getHolidays();
 
-    // Determinar fecha de inicio
-    let currentDate: Date;
-    if (startDate) {
-      // Convertir de UTC a hora de Colombia
-      currentDate = DateUtils.toColombiaTime(startDate);
-    } else {
-      // Usar hora actual de Colombia
-      currentDate = DateUtils.toColombiaTime(new Date());
+      // Determinar fecha de inicio
+      let currentDate: Date;
+      if (startDate) {
+        // Convertir de UTC a hora de Colombia
+        currentDate = DateUtils.toColombiaTime(startDate);
+      } else {
+        // Usar hora actual de Colombia
+        const nowUTC = new Date();
+        currentDate = DateUtils.toColombiaTime(nowUTC);
+      }
+
+      // Ajustar al horario laboral más cercano hacia atrás
+      currentDate = DateUtils.adjustToWorkingTime(currentDate, holidays);
+
+      // Primero añadir días hábiles
+      if (days > 0) {
+        currentDate = DateUtils.addWorkingDays(currentDate, days, holidays);
+      }
+
+      // Luego añadir horas hábiles
+      if (hours > 0) {
+        currentDate = DateUtils.addWorkingHours(currentDate, hours, holidays);
+      }
+
+      // Convertir de vuelta a UTC
+      const resultUTC = DateUtils.toUTC(currentDate);
+      
+      return resultUTC;
+    } catch (error) {
+      console.error('Error in calculateWorkingDateTime:', error);
+      throw new Error('Error interno del servidor al calcular fechas hábiles');
     }
-
-    // Ajustar al horario laboral más cercano hacia atrás
-    currentDate = DateUtils.adjustToWorkingTime(currentDate, holidays);
-
-    // Añadir días hábiles
-    if (days > 0) {
-      currentDate = DateUtils.addWorkingDays(currentDate, days, holidays);
-    }
-
-    // Añadir horas hábiles
-    if (hours > 0) {
-      currentDate = DateUtils.addWorkingHours(currentDate, hours, holidays);
-    }
-
-    // Convertir de vuelta a UTC
-    return DateUtils.toUTC(currentDate);
   }
 }
